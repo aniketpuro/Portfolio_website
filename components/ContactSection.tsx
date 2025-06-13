@@ -2,10 +2,15 @@
 
 import type React from "react"
 
-import { Box, Typography, Container, useTheme } from "@mui/material"
-import { GitHub, LinkedIn, Email } from "@mui/icons-material"
-import { motion } from "framer-motion"
 import { useState } from "react"
+import { motion } from "framer-motion"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Github, Linkedin, Mail, Send } from "lucide-react"
+import { Box } from "@mui/material"
+import { useTheme } from "@mui/material/styles"
 
 export default function ContactSection() {
   const theme = useTheme()
@@ -32,48 +37,32 @@ export default function ContactSection() {
 
   const socialLinks = [
     {
-      icon: <GitHub />,
+      icon: <Github className="h-6 w-6" />,
       label: "GitHub",
       url: "https://github.com/aniketpuro",
-      color: "#333",
+      color: "#FF6B6B",
     },
     {
-      icon: <LinkedIn />,
+      icon: <Linkedin className="h-6 w-6" />,
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/aniket-purohit-38665a24b",
-      color: "#0077B5",
+      color: "#4ECDC4",
     },
     {
-      icon: <Email />,
+      icon: <Mail className="h-6 w-6" />,
       label: "Email",
-      url: "mailto:aniket@example.com",
-      color: "#EA4335",
+      url: "mailto:aniketpurohit97@gmail.com",
+      color: "#FFD166",
     },
   ]
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
-
   return (
-    <Box
+    <section
       id="contact"
-      sx={{
-        py: { xs: 8, md: 12 },
-        position: "relative",
-        backgroundColor: theme.palette.background.paper,
+      className="py-16 md:py-24 relative"
+      style={{
+        backgroundColor: theme.palette.mode === "dark" ? "#111111" : "#f8f9fa",
+        color: theme.palette.text.primary,
       }}
     >
       {/* Mandana art inspired background pattern */}
@@ -85,119 +74,280 @@ export default function ContactSection() {
           right: 0,
           bottom: 0,
           opacity: 0.03,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zM20 69v2H0v-2h20zm79.32-55l-1 1.732-17.32-10L82 4l17.32 10zm-80 80l-1 1.732-17.32-10L2 84l17.32 10zm96.546-75.84l-1.732 1-10-17.32 1.732-1 10 17.32zm-100 100l-1.732 1-10-17.32 1.732-1 10 17.32zM38.16 24.134l1 1.732-17.32 10-1-1.732 17.32-10zM60 29v2H40v-2h20zm19.32 5l-1 1.732-17.32-10L62 24l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM111 40h-2V20h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zM40 49v2H20v-2h20zm19.32 5l-1 1.732-17.32-10L42 44l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM91 60h-2V40h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM39.32 74l-1 1.732-17.32-10L22 64l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM71 80h-2V60h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM120 89v2h-20v-2h20zm-84.134 9.16l-1.732 1-10-17.32 1.732-1 10 17.32zM51 100h-2V80h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM100 109v2H80v-2h20zm19.32 5l-1 1.732-17.32-10 1-1.732 17.32 10zM31 120h-2v-20h2v20z' fill='%23${theme.palette.secondary.main.replace(
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23${theme.palette.primary.main.replace(
             "#",
             "",
-          )}' fillOpacity='0.4' fillRule='evenodd'/%3E%3C/svg%3E")`,
+          )}' fillOpacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           zIndex: 0,
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Typography
-            variant="h2"
-            component="h2"
-            sx={{
-              mb: 2,
-              textAlign: "center",
-              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              fontWeight: 700,
-              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              position: "relative",
-              display: "inline-block",
-              left: "50%",
-              transform: "translateX(-50%)",
-              "&::after": {
-                content: '""',
-                position: "absolute",
-                width: "80px",
-                height: "4px",
-                bottom: "-10px",
-                left: "calc(50% - 40px)",
-                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                borderRadius: "2px",
-              },
-            }}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="inline-block"
           >
-            Get In Touch
-          </Typography>
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-4 relative inline-block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+              style={{ color: theme.palette.text.primary }}
+            >
+              Get In Touch
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary transform -translate-y-2"></span>
+            </h2>
+          </motion.div>
 
-          <Typography
-            variant="h6"
-            sx={{
-              mb: { xs: 4, md: 6 },
-              textAlign: "center",
-              color: theme.palette.text.secondary,
-              maxWidth: "700px",
-              mx: "auto",
-              px: 2,
-              fontSize: { xs: "1rem", md: "1.25rem" },
-            }}
-          >
+          <p style={{ color: theme.palette.text.secondary }} className="max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, collaborations, or just having a chat about DevOps and
             cloud technologies.
-          </Typography>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Split pattern for contact section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 0,
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
-          }}
-        >
-          {/* Left side - Contact form */}
-          <Box
-            sx={{
-              flex: 1,
-              background:
-                theme.palette.mode === "dark"
-                  ? "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)"
-                  : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-              p: { xs: 3, sm: 5 },
-              position: "relative",
-              borderRight: { xs: "none", md: `1px solid ${theme.palette.divider}` },
-              borderBottom: { xs: `1px solid ${theme.palette.divider}`, md: "none" },
-            }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Form Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+            <Card
+              className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 hover:border-primary/50 relative"
+              style={{
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.divider,
+              }}
             >
-              <Typography
-                variant="h5"
-                component="h3"
-                sx={{
-                  mb: 3,
-                  fontWeight: 600,
-                  color: theme.palette.primary.main,
-                  position: "relative",
-                  display: "inline-block",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    width: "40px",
-                    height: "3px",
-                    bottom: "-8px",
-                    left: 0,
-                    background: theme.palette.primary.main,
-                    borderRadius: "2px",
-                  },
+              {/* Colorful top border - Mandana art inspired */}
+              <div
+                className="h-2 absolute top-0 left-0 right-0"
+                style={{
+                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 }}
+              />
+
+              {/* Mandana art inspired decorative element */}
+              <div
+                className="absolute top-4 right-4 w-12 h-12 rounded-full opacity-10"
+                style={{ backgroundColor: theme.palette.primary.main }}
               >
-                Send me\
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2"
+                  style={{ borderColor: theme.palette.background.paper }}
+                />
+              </div>
+
+              <CardContent className="p-6 md:p-8 mt-2">
+                <h3
+                  className="text-xl font-semibold mb-6 relative inline-block"
+                  style={{ color: theme.palette.primary.main }}
+                >
+                  Send me a message
+                  <span
+                    className="absolute bottom-0 left-0 w-12 h-0.5 transform -translate-y-2"
+                    style={{ backgroundColor: theme.palette.primary.main }}
+                  ></span>
+                </h3>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium" style={{ color: theme.palette.text.primary }}>
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                      className="w-full focus:border-primary"
+                      style={{
+                        backgroundColor: theme.palette.background.default,
+                        borderColor: theme.palette.divider,
+                        color: theme.palette.text.primary,
+                      }}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium"
+                      style={{ color: theme.palette.text.primary }}
+                    >
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your email"
+                      required
+                      className="w-full focus:border-primary"
+                      style={{
+                        backgroundColor: theme.palette.background.default,
+                        borderColor: theme.palette.divider,
+                        color: theme.palette.text.primary,
+                      }}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="text-sm font-medium"
+                      style={{ color: theme.palette.text.primary }}
+                    >
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Your message"
+                      required
+                      className="w-full min-h-[120px] focus:border-primary"
+                      style={{
+                        backgroundColor: theme.palette.background.default,
+                        borderColor: theme.palette.divider,
+                        color: theme.palette.text.primary,
+                      }}
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full transition-colors"
+                    style={{
+                      backgroundColor: theme.palette.primary.main,
+                      color: theme.palette.primary.contrastText,
+                    }}
+                  >
+                    Send Message
+                    <Send className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Connect Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Card
+              className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 hover:border-primary/50 relative"
+              style={{
+                backgroundColor: theme.palette.background.paper,
+                borderColor: theme.palette.divider,
+              }}
+            >
+              {/* Colorful top border - Mandana art inspired */}
+              <div
+                className="h-2 absolute top-0 left-0 right-0"
+                style={{
+                  background: `linear-gradient(90deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+                }}
+              />
+
+              {/* Mandana art inspired decorative element */}
+              <div
+                className="absolute top-4 right-4 w-12 h-12 rounded-full opacity-10"
+                style={{ backgroundColor: theme.palette.secondary.main }}
+              >
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2"
+                  style={{ borderColor: theme.palette.background.paper }}
+                />
+              </div>
+
+              <CardContent className="p-6 md:p-8 flex flex-col h-[calc(100%-8px)] mt-2">
+                <h3
+                  className="text-xl font-semibold mb-6 text-center relative inline-block self-center"
+                  style={{ color: theme.palette.primary.main }}
+                >
+                  Connect with me
+                  <span
+                    className="absolute bottom-0 left-1/2 w-12 h-0.5 transform -translate-x-1/2 -translate-y-2"
+                    style={{ backgroundColor: theme.palette.primary.main }}
+                  ></span>
+                </h3>
+
+                <p style={{ color: theme.palette.text.secondary }} className="text-center mb-8">
+                  Feel free to reach out through any of these platforms. I'm always excited to connect with fellow
+                  developers and discuss the latest in DevOps and cloud technologies.
+                </p>
+
+                {/* Decorative element */}
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-20 pointer-events-none"
+                  style={{ border: `4px solid ${theme.palette.primary.main}20` }}
+                >
+                  <div
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full"
+                    style={{ border: `4px solid ${theme.palette.primary.main}40` }}
+                  ></div>
+                  <div
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full"
+                    style={{ border: `4px solid ${theme.palette.primary.main}60` }}
+                  ></div>
+                </div>
+
+                <div className="flex justify-center gap-8 mt-auto relative z-10">
+                  {socialLinks.map((link, index) => (
+                    <motion.a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col items-center"
+                      whileHover={{ y: -5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div
+                        className="p-4 rounded-full transition-colors"
+                        style={{
+                          backgroundColor: `${link.color}20`,
+                          color: link.color,
+                          border: `1px solid ${link.color}40`,
+                        }}
+                      >
+                        {link.icon}
+                      </div>
+                      <span className="mt-2 text-sm font-medium" style={{ color: theme.palette.text.primary }}>
+                        {link.label}
+                      </span>
+                    </motion.a>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+
+        {/* Footer */}
+        <div
+          className="mt-16 pt-8 text-center"
+          style={{ borderTopColor: theme.palette.divider, borderTopWidth: "1px", borderTopStyle: "solid" }}
+        >
+          <p style={{ color: theme.palette.text.secondary }}>
+            © {new Date().getFullYear()} Aniket Purohit. All rights reserved.
+          </p>
+          <p className="text-xs mt-2" style={{ color: theme.palette.text.secondary }}>
+            Made with ❤️ using Next.js, Tailwind CSS, and Framer Motion
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}

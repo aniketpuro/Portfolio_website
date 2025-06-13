@@ -16,8 +16,32 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const savedMode = localStorage.getItem("theme") as "light" | "dark"
     if (savedMode) {
       setMode(savedMode)
+    } else {
+      // Check system preference
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+      setMode(systemPrefersDark ? "dark" : "light")
     }
   }, [])
+
+  // Apply theme to document body
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", mode)
+    document.body.className = mode
+
+    // Update CSS custom properties for the theme
+    const root = document.documentElement
+    if (mode === "dark") {
+      root.style.setProperty("--background-color", "#0a0a0a")
+      root.style.setProperty("--text-color", "#ffffff")
+      root.style.setProperty("--card-background", "#1a1a1a")
+      root.style.setProperty("--border-color", "rgba(255, 255, 255, 0.1)")
+    } else {
+      root.style.setProperty("--background-color", "#ffffff")
+      root.style.setProperty("--text-color", "#000000")
+      root.style.setProperty("--card-background", "#f8f9fa")
+      root.style.setProperty("--border-color", "rgba(0, 0, 0, 0.1)")
+    }
+  }, [mode])
 
   const colorMode = {
     toggleColorMode: () => {
@@ -39,6 +63,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       background: {
         default: mode === "dark" ? "#0a0a0a" : "#ffffff",
         paper: mode === "dark" ? "#1a1a1a" : "#f5f5f5",
+      },
+      text: {
+        primary: mode === "dark" ? "#ffffff" : "#000000",
+        secondary: mode === "dark" ? "#b0b0b0" : "#666666",
       },
     },
     typography: {
@@ -69,6 +97,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           root: {
             borderRadius: 12,
             boxShadow: mode === "dark" ? "0 4px 20px rgba(100, 255, 218, 0.1)" : "0 4px 20px rgba(0, 0, 0, 0.1)",
+            backgroundColor: mode === "dark" ? "#1a1a1a" : "#ffffff",
           },
         },
       },
@@ -79,7 +108,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     <ColorModeContext.Provider value={colorMode}>
       <MUIThemeProvider theme={theme}>
         <CssBaseline />
-        {children}
+        <div
+          style={{
+            backgroundColor: theme.palette.background.default,
+            color: theme.palette.text.primary,
+            minHeight: "100vh",
+            transition: "background-color 0.3s ease, color 0.3s ease",
+          }}
+        >
+          {children}
+        </div>
       </MUIThemeProvider>
     </ColorModeContext.Provider>
   )

@@ -23,27 +23,53 @@ export default function Navigation() {
         sx={{
           backgroundColor: theme.palette.mode === "dark" ? "rgba(10, 10, 10, 0.9)" : "rgba(255, 255, 255, 0.9)",
           backdropFilter: "blur(10px)",
-          boxShadow: "none",
+          boxShadow:
+            theme.palette.mode === "dark" ? "0 2px 10px rgba(100, 255, 218, 0.1)" : "0 2px 10px rgba(0, 0, 0, 0.1)",
           borderBottom: `1px solid ${theme.palette.divider}`,
         }}
       >
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 700 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              fontWeight: 700,
+              color: theme.palette.text.primary,
+            }}
+          >
             Aniket Purohit
           </Typography>
 
           {["About", "Projects", "Learning", "Blogs", "Contact"].map((item) => (
             <Button
               key={item}
-              color="inherit"
               onClick={() => scrollToSection(item.toLowerCase())}
-              sx={{ mx: 1, "&:hover": { backgroundColor: "rgba(100, 255, 218, 0.1)" } }}
+              sx={{
+                mx: 1,
+                color: theme.palette.text.primary,
+                "&:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "dark" ? "rgba(100, 255, 218, 0.1)" : "rgba(25, 118, 210, 0.1)",
+                  color: theme.palette.primary.main,
+                },
+                fontWeight: 500,
+                textTransform: "none",
+              }}
             >
               {item}
             </Button>
           ))}
 
-          <IconButton onClick={toggleColorMode} color="inherit">
+          <IconButton
+            onClick={toggleColorMode}
+            sx={{
+              color: theme.palette.text.primary,
+              "&:hover": {
+                backgroundColor: theme.palette.mode === "dark" ? "rgba(100, 255, 218, 0.1)" : "rgba(25, 118, 210, 0.1)",
+              },
+            }}
+          >
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
         </Toolbar>
