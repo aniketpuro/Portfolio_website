@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Typography, Container, Grid, Card, CardContent, Chip, Button, useTheme } from "@mui/material"
+import { Box, Typography, Container, Card, CardContent, Chip, Button, useTheme } from "@mui/material"
 import { GitHub, Launch, Star, Code } from "@mui/icons-material"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -111,7 +111,6 @@ export default function ProjectsSection() {
       sx={{
         py: { xs: 8, md: 12 },
         position: "relative",
-        overflow: "hidden",
         backgroundColor: theme.palette.background.default,
       }}
     >
@@ -193,224 +192,221 @@ export default function ProjectsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <Grid container spacing={{ xs: 3, md: 4 }}>
+          <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "1fr 1fr 1fr" }, gap: 3 }}>
             {projects.map((project, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={index}>
-                <motion.div
-                  variants={itemVariants}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  whileHover={{ y: -10 }}
-                  style={{ height: "100%" }} // Ensure the motion div takes full height
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                whileHover={{ y: -10 }}
+              >
+                <Card
+                  sx={{
+                    height: "100%", // Make all cards the same height
+                    display: "flex",
+                    flexDirection: "column",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "16px",
+                    background:
+                      theme.palette.mode === "dark"
+                        ? "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)"
+                        : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+                    border: `1px solid ${theme.palette.divider}`,
+                    transition: "all 0.4s ease",
+                    boxShadow:
+                      hoveredIndex === index
+                        ? `0 20px 60px ${project.color}30`
+                        : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
+                  }}
                 >
-                  <Card
+                  {/* Colorful top border - Mandana art inspired */}
+                  <Box
                     sx={{
-                      height: "100%", // Make all cards the same height
+                      height: "6px",
+                      background: `linear-gradient(90deg, ${project.color}, ${theme.palette.primary.main})`,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                  />
+
+                  {/* Mandana art inspired decorative element */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 20,
+                      right: 20,
+                      width: "60px",
+                      height: "60px",
+                      opacity: 0.1,
+                      borderRadius: "50%",
+                      background: project.color,
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        border: `2px solid ${theme.palette.background.paper}`,
+                      },
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "20px",
+                        height: "20px",
+                        borderRadius: "50%",
+                        background: theme.palette.background.paper,
+                      },
+                    }}
+                  />
+
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      p: 3,
+                      zIndex: 1,
                       display: "flex",
                       flexDirection: "column",
-                      position: "relative",
-                      overflow: "hidden",
-                      borderRadius: "16px",
-                      background:
-                        theme.palette.mode === "dark"
-                          ? "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)"
-                          : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-                      border: `1px solid ${theme.palette.divider}`,
-                      transition: "all 0.4s ease",
-                      boxShadow:
-                        hoveredIndex === index
-                          ? `0 20px 60px ${project.color}30`
-                          : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
                     }}
                   >
-                    {/* Colorful top border - Mandana art inspired */}
-                    <Box
-                      sx={{
-                        height: "6px",
-                        background: `linear-gradient(90deg, ${project.color}, ${theme.palette.primary.main})`,
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                      }}
-                    />
-
-                    {/* Mandana art inspired decorative element */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 20,
-                        right: 20,
-                        width: "60px",
-                        height: "60px",
-                        opacity: 0.1,
-                        borderRadius: "50%",
-                        background: project.color,
-                        "&::before": {
-                          content: '""',
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "50%",
-                          border: `2px solid ${theme.palette.background.paper}`,
-                        },
-                        "&::after": {
-                          content: '""',
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "20px",
-                          height: "20px",
-                          borderRadius: "50%",
-                          background: theme.palette.background.paper,
-                        },
-                      }}
-                    />
-
-                    <CardContent
-                      sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        zIndex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%", // Ensure card content takes full height
-                      }}
-                    >
-                      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
-                        <Typography
-                          variant="h6"
-                          component="h3"
-                          sx={{
-                            fontWeight: 700,
-                            flexGrow: 1,
-                            color: project.color,
-                            fontSize: { xs: "1.1rem", sm: "1.25rem" },
-                            height: "2.5rem", // Fixed height for title
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >
-                          {project.name}
-                        </Typography>
-                        <Box sx={{ display: "flex", alignItems: "center", ml: 1 }}>
-                          <Star sx={{ fontSize: 16, color: "#FFD700", mr: 0.5 }} />
-                          <Typography variant="caption" color="text.secondary">
-                            {project.stars}
-                          </Typography>
-                        </Box>
-                      </Box>
-
+                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
                       <Typography
-                        variant="body2"
-                        color="text.secondary"
+                        variant="h6"
+                        component="h3"
                         sx={{
-                          mb: 3,
-                          lineHeight: 1.6,
-                          fontSize: { xs: "0.875rem", sm: "0.9rem" },
-                          height: "4.8rem", // Fixed height for description (3 lines)
+                          fontWeight: 700,
+                          flexGrow: 1,
+                          color: project.color,
+                          fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                          height: "2.5rem", // Fixed height for title
                           display: "-webkit-box",
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {project.description}
+                        {project.name}
                       </Typography>
-
-                      <Box
-                        sx={{
-                          mb: 3,
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: 1,
-                          height: "2.5rem", // Fixed height for language tags
-                          overflow: "hidden",
-                        }}
-                      >
-                        {project.languages.map((lang, langIndex) => (
-                          <Chip
-                            key={langIndex}
-                            label={lang}
-                            size="small"
-                            icon={<Code sx={{ fontSize: 16 }} />}
-                            sx={{
-                              backgroundColor: getLanguageColor(lang) + "20",
-                              color: getLanguageColor(lang),
-                              border: `1px solid ${getLanguageColor(lang)}40`,
-                              fontWeight: 500,
-                              borderRadius: "8px",
-                              "& .MuiChip-icon": {
-                                color: getLanguageColor(lang),
-                              },
-                            }}
-                          />
-                        ))}
+                      <Box sx={{ display: "flex", alignItems: "center", ml: 1 }}>
+                        <Star sx={{ fontSize: 16, color: "#FFD700", mr: 0.5 }} />
+                        <Typography variant="caption" color="text.secondary">
+                          {project.stars}
+                        </Typography>
                       </Box>
+                    </Box>
 
-                      <Box
-                        sx={{
-                          display: "flex",
-                          gap: 1,
-                          mt: "auto", // Push buttons to bottom
-                        }}
-                      >
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        mb: 3,
+                        lineHeight: 1.6,
+                        fontSize: { xs: "0.875rem", sm: "0.9rem" },
+                        height: "4.8rem", // Fixed height for description (3 lines)
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {project.description}
+                    </Typography>
+
+                    <Box
+                      sx={{
+                        mb: 3,
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 1,
+                        height: "2.5rem", // Fixed height for language tags
+                        overflow: "hidden",
+                      }}
+                    >
+                      {project.languages.map((lang, langIndex) => (
+                        <Chip
+                          key={langIndex}
+                          label={lang}
+                          size="small"
+                          icon={<Code sx={{ fontSize: 16 }} />}
+                          sx={{
+                            backgroundColor: getLanguageColor(lang) + "20",
+                            color: getLanguageColor(lang),
+                            border: `1px solid ${getLanguageColor(lang)}40`,
+                            fontWeight: 500,
+                            borderRadius: "8px",
+                            "& .MuiChip-icon": {
+                              color: getLanguageColor(lang),
+                            },
+                          }}
+                        />
+                      ))}
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        mt: "auto", // Push buttons to bottom
+                      }}
+                    >
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          startIcon={<GitHub />}
+                          href={project.url}
+                          target="_blank"
+                          sx={{
+                            borderRadius: "8px",
+                            borderColor: project.color,
+                            color: project.color,
+                            "&:hover": {
+                              backgroundColor: project.color + "10",
+                              borderColor: project.color,
+                            },
+                          }}
+                        >
+                          Code
+                        </Button>
+                      </motion.div>
+                      {project.demo && (
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                           <Button
-                            variant="outlined"
+                            variant="contained"
                             size="small"
-                            startIcon={<GitHub />}
-                            href={project.url}
+                            startIcon={<Launch />}
+                            href={project.demo}
                             target="_blank"
                             sx={{
                               borderRadius: "8px",
-                              borderColor: project.color,
-                              color: project.color,
+                              backgroundColor: project.color,
                               "&:hover": {
-                                backgroundColor: project.color + "10",
-                                borderColor: project.color,
+                                backgroundColor: project.color + "DD",
+                                boxShadow: `0 4px 12px ${project.color}40`,
                               },
                             }}
                           >
-                            Code
+                            Demo
                           </Button>
                         </motion.div>
-                        {project.demo && (
-                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Button
-                              variant="contained"
-                              size="small"
-                              startIcon={<Launch />}
-                              href={project.demo}
-                              target="_blank"
-                              sx={{
-                                borderRadius: "8px",
-                                backgroundColor: project.color,
-                                "&:hover": {
-                                  backgroundColor: project.color + "DD",
-                                  boxShadow: `0 4px 12px ${project.color}40`,
-                                },
-                              }}
-                            >
-                              Demo
-                            </Button>
-                          </motion.div>
-                        )}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
+                      )}
+                    </Box>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
 
         <motion.div

@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Typography, Container, Grid, Card, CardContent, Button, useTheme } from "@mui/material"
+import { Box, Typography, Container, Card, CardContent, Button, useTheme } from "@mui/material"
 import { AccessTime, Launch, ArrowForward } from "@mui/icons-material"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -108,7 +108,6 @@ export default function BlogsSection() {
       sx={{
         py: { xs: 8, md: 12 },
         position: "relative",
-        overflow: "hidden",
         backgroundColor: theme.palette.background.default,
       }}
     >
@@ -190,211 +189,208 @@ export default function BlogsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <Grid container spacing={{ xs: 3, md: 4 }}>
+          <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 4 }}>
             {blogs.map((blog, index) => (
-              <Grid item xs={12} md={6} key={index}>
-                <motion.div
-                  variants={itemVariants}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  whileHover={{ y: -10 }}
-                  style={{ height: "100%" }} // Ensure the motion div takes full height
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                whileHover={{ y: -10 }}
+              >
+                <Card
+                  sx={{
+                    height: "100%", // Make all cards the same height
+                    display: "flex",
+                    flexDirection: "column",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "16px",
+                    background:
+                      theme.palette.mode === "dark"
+                        ? "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)"
+                        : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+                    border: `1px solid ${theme.palette.divider}`,
+                    transition: "all 0.4s ease",
+                    boxShadow:
+                      hoveredIndex === index
+                        ? `0 20px 60px ${blog.color}30`
+                        : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
+                  }}
                 >
-                  <Card
-                    sx={{
-                      height: "100%", // Make all cards the same height
-                      display: "flex",
-                      flexDirection: "column",
-                      position: "relative",
-                      overflow: "hidden",
-                      borderRadius: "16px",
-                      background:
-                        theme.palette.mode === "dark"
-                          ? "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%)"
-                          : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-                      border: `1px solid ${theme.palette.divider}`,
-                      transition: "all 0.4s ease",
-                      boxShadow:
-                        hoveredIndex === index
-                          ? `0 20px 60px ${blog.color}30`
-                          : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
-                    }}
-                  >
-                    {/* Blog image with overlay - fixed height */}
-                    <Box sx={{ position: "relative", height: 180, overflow: "hidden" }}>
-                      <Box
-                        component="img"
-                        src={blog.image}
-                        alt={blog.title}
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.5s ease",
-                          transform: hoveredIndex === index ? "scale(1.05)" : "scale(1)",
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: `linear-gradient(to bottom, ${blog.color}00, ${blog.color}90)`,
-                        }}
-                      />
+                  {/* Blog image with overlay - fixed height */}
+                  <Box sx={{ position: "relative", height: 180, overflow: "hidden" }}>
+                    <Box
+                      component="img"
+                      src={blog.image}
+                      alt={blog.title}
+                      sx={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transition: "transform 0.5s ease",
+                        transform: hoveredIndex === index ? "scale(1.05)" : "scale(1)",
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: `linear-gradient(to bottom, ${blog.color}00, ${blog.color}90)`,
+                      }}
+                    />
 
-                      {/* Mandana art inspired decorative elements */}
-                      <Box
+                    {/* Mandana art inspired decorative elements */}
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 15,
+                        right: 15,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        backgroundColor: "rgba(255,255,255,0.9)",
+                        borderRadius: "20px",
+                        padding: "4px 12px",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      <AccessTime sx={{ fontSize: 14, color: blog.color }} />
+                      <Typography
+                        variant="caption"
                         sx={{
-                          position: "absolute",
-                          top: 15,
-                          right: 15,
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 1,
-                          backgroundColor: "rgba(255,255,255,0.9)",
-                          borderRadius: "20px",
-                          padding: "4px 12px",
-                          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                          fontWeight: 600,
+                          color: blog.color,
                         }}
                       >
-                        <AccessTime sx={{ fontSize: 14, color: blog.color }} />
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            fontWeight: 600,
-                            color: blog.color,
-                          }}
-                        >
-                          {blog.readTime}
-                        </Typography>
-                      </Box>
-
-                      {/* Mandana art inspired decorative circle */}
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          bottom: -20,
-                          left: 20,
-                          width: 40,
-                          height: 40,
-                          borderRadius: "50%",
-                          backgroundColor: "white",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                          border: `2px solid ${blog.color}`,
-                          zIndex: 2,
-                        }}
-                      >
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            fontWeight: 700,
-                            color: blog.color,
-                            fontSize: "0.7rem",
-                          }}
-                        >
-                          {new Date(blog.date).toLocaleDateString("en-US", { day: "numeric" })}
-                        </Typography>
-                      </Box>
+                        {blog.readTime}
+                      </Typography>
                     </Box>
 
-                    <CardContent
+                    {/* Mandana art inspired decorative circle */}
+                    <Box
                       sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        pt: 4,
+                        position: "absolute",
+                        bottom: -20,
+                        left: 20,
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        backgroundColor: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                        border: `2px solid ${blog.color}`,
+                        zIndex: 2,
                       }}
                     >
                       <Typography
                         variant="caption"
                         sx={{
-                          color: theme.palette.text.secondary,
-                          fontWeight: 500,
-                          mb: 1,
-                          display: "block",
-                          height: "1.5rem", // Fixed height for date
-                        }}
-                      >
-                        {formatDate(blog.date).split(" ").slice(0, 2).join(" ")} {new Date(blog.date).getFullYear()}
-                      </Typography>
-
-                      <Typography
-                        variant="h5"
-                        component="h3"
-                        sx={{
                           fontWeight: 700,
-                          mb: 2,
-                          lineHeight: 1.3,
-                          fontSize: { xs: "1.25rem", sm: "1.5rem" },
                           color: blog.color,
-                          height: "3.9rem", // Fixed height for title (2 lines)
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
+                          fontSize: "0.7rem",
                         }}
                       >
-                        {blog.title}
+                        {new Date(blog.date).toLocaleDateString("en-US", { day: "numeric" })}
                       </Typography>
+                    </Box>
+                  </Box>
 
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                          mb: 3,
-                          lineHeight: 1.6,
-                          fontSize: { xs: "0.875rem", sm: "0.9rem" },
-                          height: "4.8rem", // Fixed height for preview (3 lines)
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {blog.preview}
-                      </Typography>
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      p: 3,
+                      pt: 4,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: theme.palette.text.secondary,
+                        fontWeight: 500,
+                        mb: 1,
+                        display: "block",
+                      }}
+                    >
+                      {formatDate(blog.date).split(" ").slice(0, 2).join(" ")} {new Date(blog.date).getFullYear()}
+                    </Typography>
 
-                      <Box sx={{ mt: "auto" }}>
-                        <motion.div whileHover={{ x: 5 }} whileTap={{ scale: 0.95 }}>
-                          <Button
-                            variant="text"
-                            endIcon={<ArrowForward />}
-                            href={blog.url}
-                            target="_blank"
-                            sx={{
-                              color: blog.color,
-                              fontWeight: 600,
-                              p: 0,
-                              "&:hover": {
-                                backgroundColor: "transparent",
-                              },
-                              "& .MuiButton-endIcon": {
-                                transition: "transform 0.3s ease",
-                              },
-                              "&:hover .MuiButton-endIcon": {
-                                transform: "translateX(4px)",
-                              },
-                            }}
-                          >
-                            Read Article
-                          </Button>
-                        </motion.div>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
+                    <Typography
+                      variant="h5"
+                      component="h3"
+                      sx={{
+                        fontWeight: 700,
+                        mb: 2,
+                        lineHeight: 1.3,
+                        fontSize: { xs: "1.25rem", sm: "1.5rem" },
+                        color: blog.color,
+                        height: "3.9rem", // Fixed height for title (2 lines)
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {blog.title}
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        mb: 3,
+                        lineHeight: 1.6,
+                        fontSize: { xs: "0.875rem", sm: "0.9rem" },
+                        height: "4.8rem", // Fixed height for preview (3 lines)
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {blog.preview}
+                    </Typography>
+
+                    <Box sx={{ mt: "auto" }}>
+                      <motion.div whileHover={{ x: 5 }} whileTap={{ scale: 0.95 }}>
+                        <Button
+                          variant="text"
+                          endIcon={<ArrowForward />}
+                          href={blog.url}
+                          target="_blank"
+                          sx={{
+                            color: blog.color,
+                            fontWeight: 600,
+                            p: 0,
+                            "&:hover": {
+                              backgroundColor: "transparent",
+                            },
+                            "& .MuiButton-endIcon": {
+                              transition: "transform 0.3s ease",
+                            },
+                            "&:hover .MuiButton-endIcon": {
+                              transform: "translateX(4px)",
+                            },
+                          }}
+                        >
+                          Read Article
+                        </Button>
+                      </motion.div>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
 
         <motion.div

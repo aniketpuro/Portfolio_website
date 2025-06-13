@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Typography, Container, Grid, Card, CardContent, Chip, useTheme } from "@mui/material"
+import { Box, Typography, Container, Card, CardContent, Chip, useTheme } from "@mui/material"
 import { School, Person, TrendingUp } from "@mui/icons-material"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -137,7 +137,6 @@ export default function LearningSection() {
       sx={{
         py: { xs: 8, md: 12 },
         position: "relative",
-        overflow: "hidden",
         backgroundColor: theme.palette.background.paper,
       }}
     >
@@ -219,171 +218,169 @@ export default function LearningSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <Grid container spacing={3}>
+          <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "1fr 1fr 1fr" }, gap: 3 }}>
             {courses.map((course, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={index}>
-                <motion.div
-                  variants={itemVariants}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  whileHover={{ y: -5 }}
-                  style={{ height: "100%" }} // Ensure the motion div takes full height
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                whileHover={{ y: -5 }}
+              >
+                <Card
+                  sx={{
+                    height: "100%", // Make all cards the same height
+                    background:
+                      theme.palette.mode === "dark"
+                        ? "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
+                        : "linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)",
+                    border: `1px solid ${theme.palette.divider}`,
+                    borderRadius: "16px",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "all 0.3s ease",
+                    boxShadow:
+                      hoveredIndex === index
+                        ? `0 12px 40px ${course.color}30`
+                        : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
+                  }}
                 >
-                  <Card
+                  {/* Colorful top border - Mandana art inspired */}
+                  <Box
                     sx={{
-                      height: "100%", // Make all cards the same height
-                      background:
-                        theme.palette.mode === "dark"
-                          ? "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
-                          : "linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)",
-                      border: `1px solid ${theme.palette.divider}`,
-                      borderRadius: "16px",
-                      position: "relative",
-                      overflow: "hidden",
-                      transition: "all 0.3s ease",
-                      boxShadow:
-                        hoveredIndex === index
-                          ? `0 12px 40px ${course.color}30`
-                          : `0 8px 30px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}`,
+                      height: "6px",
+                      background: `linear-gradient(90deg, ${course.color}, ${theme.palette.primary.main})`,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                  />
+
+                  {/* Mandana art inspired decorative element */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 15,
+                      right: 15,
+                      width: "40px",
+                      height: "40px",
+                      opacity: 0.1,
+                      borderRadius: "50%",
+                      background: course.color,
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "25px",
+                        height: "25px",
+                        borderRadius: "50%",
+                        border: `2px solid ${theme.palette.background.paper}`,
+                      },
+                    }}
+                  />
+
+                  <CardContent
+                    sx={{
+                      p: 3,
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
                     }}
                   >
-                    {/* Colorful top border - Mandana art inspired */}
-                    <Box
-                      sx={{
-                        height: "6px",
-                        background: `linear-gradient(90deg, ${course.color}, ${theme.palette.primary.main})`,
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                      }}
-                    />
-
-                    {/* Mandana art inspired decorative element */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 15,
-                        right: 15,
-                        width: "40px",
-                        height: "40px",
-                        opacity: 0.1,
-                        borderRadius: "50%",
-                        background: course.color,
-                        "&::before": {
-                          content: '""',
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "25px",
-                          height: "25px",
-                          borderRadius: "50%",
-                          border: `2px solid ${theme.palette.background.paper}`,
-                        },
-                      }}
-                    />
-
-                    <CardContent
-                      sx={{
-                        p: 3,
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
-                        <Box
-                          sx={{
-                            p: 1,
-                            borderRadius: 2,
-                            backgroundColor: course.color + "20",
-                            color: course.color,
-                            mr: 2,
-                            mt: 0.5,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: 40,
-                            height: 40,
-                            flexShrink: 0,
-                          }}
-                        >
-                          {getCategoryIcon(course.category)}
-                        </Box>
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Typography
-                            variant="h6"
-                            component="h3"
-                            sx={{
-                              fontWeight: 600,
-                              mb: 1,
-                              lineHeight: 1.3,
-                              color: course.color,
-                              height: "2.6rem", // Fixed height for title
-                              display: "-webkit-box",
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: "vertical",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                            }}
-                          >
-                            {course.title}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{
-                              mb: 2,
-                              height: "1.5rem", // Fixed height for tutor name
-                              display: "-webkit-box",
-                              WebkitLineClamp: 1,
-                              WebkitBoxOrient: "vertical",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                            }}
-                          >
-                            Instructor: {course.tutor}
-                          </Typography>
-                        </Box>
-                      </Box>
-
+                    <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
                       <Box
                         sx={{
+                          p: 1,
+                          borderRadius: 2,
+                          backgroundColor: course.color + "20",
+                          color: course.color,
+                          mr: 2,
+                          mt: 0.5,
                           display: "flex",
-                          gap: 1,
-                          flexWrap: "wrap",
-                          mt: "auto", // Push chips to bottom
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: 40,
+                          height: 40,
+                          flexShrink: 0,
                         }}
                       >
-                        <Chip
-                          label={course.level}
-                          size="small"
-                          sx={{
-                            backgroundColor: getLevelColor(course.level) + "20",
-                            color: getLevelColor(course.level),
-                            border: `1px solid ${getLevelColor(course.level)}40`,
-                            fontWeight: 600,
-                            borderRadius: "8px",
-                          }}
-                        />
-                        <Chip
-                          label={course.category}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            borderColor: course.color + "40",
-                            color: course.color,
-                            borderRadius: "8px",
-                          }}
-                        />
+                        {getCategoryIcon(course.category)}
                       </Box>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Typography
+                          variant="h6"
+                          component="h3"
+                          sx={{
+                            fontWeight: 600,
+                            mb: 1,
+                            lineHeight: 1.3,
+                            color: course.color,
+                            height: "2.6rem", // Fixed height for title
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {course.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{
+                            mb: 2,
+                            height: "1.5rem", // Fixed height for tutor name
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          Instructor: {course.tutor}
+                        </Typography>
+                      </Box>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        flexWrap: "wrap",
+                        mt: "auto", // Push chips to bottom
+                      }}
+                    >
+                      <Chip
+                        label={course.level}
+                        size="small"
+                        sx={{
+                          backgroundColor: getLevelColor(course.level) + "20",
+                          color: getLevelColor(course.level),
+                          border: `1px solid ${getLevelColor(course.level)}40`,
+                          fontWeight: 600,
+                          borderRadius: "8px",
+                        }}
+                      />
+                      <Chip
+                        label={course.category}
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                          borderColor: course.color + "40",
+                          color: course.color,
+                          borderRadius: "8px",
+                        }}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>
