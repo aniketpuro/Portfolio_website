@@ -1,8 +1,8 @@
 # 🌐 Modern Portfolio Website
 
-> 🚀 Live at: [v0-modern-portfolio-website-gamma-lyart.vercel.app](https://v0-modern-portfolio-website-gamma-lyart.vercel.app/)
+> 🚀 **Live at:** [v0-modern-portfolio-website-gamma-lyart.vercel.app](https://v0-modern-portfolio-website-gamma-lyart.vercel.app/)
 
-This is my personal portfolio built using [v0.dev](https://v0.dev) and deployed on [Vercel](https://vercel.com). It showcases my projects, skills, and professional journey in a modern, responsive design.
+This is my personal portfolio built using [v0.dev](https://v0.dev) and deployed on [Vercel](https://vercel.com). It highlights my DevOps projects, certifications, blogs, and skills in a modern, clean UI.
 
 ---
 
@@ -11,40 +11,58 @@ This is my personal portfolio built using [v0.dev](https://v0.dev) and deployed 
 
 ---
 
+## 📸 Screenshots
+
+### 🖼️ Homepage + Projects
+![Portfolio Homepage Screenshot](screenshots/portfolio-home.png)
+
+### 📚 Certifications + Blogs + Contact
+![Portfolio Learning & Blog Screenshot](screenshots/portfolio-learning-blog.png)
+
+> 📁 *Make sure to save your screenshots in a folder named `screenshots` in the root of the repo.*
+
+---
+
 ## ✨ Overview
 
-This repository stays in sync with my deployed app on [v0.dev](https://v0.dev). Any updates made through the v0 interface are automatically pushed to this GitHub repo and deployed by Vercel.
+This repository stays in sync with my deployed app on [v0.dev](https://v0.dev). Any updates made in the v0 editor are automatically committed to this repo and deployed via Vercel.
 
 ---
 
 ## 🚀 Live Deployment
 
-🔗 **Visit my live portfolio:**  
+🔗 **Portfolio Link:**  
 **[https://v0-modern-portfolio-website-gamma-lyart.vercel.app](https://v0-modern-portfolio-website-gamma-lyart.vercel.app/)**
 
 ---
 
-## 🛠️ Build & Update Your App
+## 🛠️ Build & Update
 
-Continue editing or extending the design via:  
-👉 **[v0.dev Project Editor](https://v0.dev/chat/projects/JFIVmaVwUhg)**
+Continue developing the design here:  
+👉 [v0.dev Project Editor](https://v0.dev/chat/projects/JFIVmaVwUhg)
 
 ---
 
 ## 🔁 How It Works
 
-1. Build and customize your site using [v0.dev](https://v0.dev)
-2. Deploy directly from the v0 interface
-3. Changes automatically sync with this GitHub repo
-4. Vercel continuously deploys the latest version
+1. Build & modify using [v0.dev](https://v0.dev)
+2. Deploy the UI via v0
+3. Changes sync automatically to GitHub
+4. Vercel redeploys the latest build
 
 ---
 
-## 📌 Tech Stack
+## 🧰 Tech Stack
 
-- **Frontend Builder**: [v0.dev](https://v0.dev)  
-- **Deployment**: [Vercel](https://vercel.com)  
-- **Hosting**: GitHub + Vercel  
+- **Frontend Builder**: [v0.dev](https://v0.dev)
+- **Hosting**: GitHub + Vercel
 - **Tech**: React, Tailwind CSS (via v0)
+- **Integrations**: Markdown, EmailJS, Badge Shields
+
+---
+
+## 🙌 Acknowledgements
+
+Inspired by the power of serverless, AI-assisted UI building with [v0.dev](https://v0.dev). Hosted with love on [Vercel](https://vercel.com).
 
 ---
