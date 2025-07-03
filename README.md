@@ -14,12 +14,10 @@ This is my personal portfolio built using [v0.dev](https://v0.dev) and deployed 
 ## 📸 Screenshots
 
 ### 🖼️ Homepage + Projects
-![Portfolio Homepage Screenshot](screenshots/portfolio-home.png)
+![Homepage Screenshot](./Screenshot_20250703-225847.png)
 
 ### 📚 Certifications + Blogs + Contact
-![Portfolio Learning & Blog Screenshot](screenshots/portfolio-learning-blog.png)
-
-> 📁 *Make sure to save your screenshots in a folder named `screenshots` in the root of the repo.*
+![Certifications and Blog Screenshot](./Screenshot_20250703-225934.png)
 
 ---
 
